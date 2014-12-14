@@ -14,4 +14,11 @@ class ShortenerController(implicit inj: Injector) extends Controller with Inject
    def index = Action {
      Ok(html.index("Hello world"))
    }
+   
+   def shorten(url:String) = Action {
+     val shortened = shortener.shorten(url)
+     Ok(html.shorten(url)(shortened))
+   }
+   
+   def redirect(key:String) = TODO
 }

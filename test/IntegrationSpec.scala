@@ -5,9 +5,15 @@ import play.api.test._
 import play.api.test.Helpers._
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
+import scaldi.Module
+import com.stupid.shortener.ShortenerService
 
 @RunWith(classOf[JUnitRunner])
 class IntegrationSpec extends Specification {
+  
+  class TestModule extends Module {
+    bind [ShortenerService]
+  }
   
   "Application" should {
     

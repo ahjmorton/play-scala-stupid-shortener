@@ -4,3 +4,7 @@
 
 # Home page
 GET     /                           @controllers.ShortenerController.index
+
+GET     /                           @controllers.ShortenerController.redirect(key:String)
+
+GET     /shorten                    @controllers.ShortenerController.shorten(url:String)
