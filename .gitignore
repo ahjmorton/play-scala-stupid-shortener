@@ -1,0 +1,14 @@
+logs
+project/project
+project/target
+target
+tmp
+dist
+.cache
+.metadata
+*.swp
+.DS_Store
+.classpath
+.project
+.settings
+bin

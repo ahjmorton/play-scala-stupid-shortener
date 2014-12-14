@@ -1,0 +1,32 @@
+package test
+
+import org.specs2.mutable._
+import play.api.test._
+import play.api.test.Helpers._
+import org.junit.runner.RunWith
+import org.specs2.runner.JUnitRunner
+
+@RunWith(classOf[JUnitRunner])
+class StupidUrlShortenerSpec extends Specification {
+  
+  "Application" should {
+    
+    "send 404 on a bad request" in {
+      running(FakeApplication()) {
+        route(FakeRequest(GET, "/boum")) must beNone        
+      }
+    }
+    
+    "render hello world" in {
+      running(FakeApplication()) {
+        val home = route(FakeRequest(GET, "/")).get
+        
+        status(home) must equalTo(OK)
+        contentType(home) must beSome.which(_ == "text/html")
+        contentAsString(home) must be containing "Hello world"
+      }
+    }
+    
+  }
+  
+}
