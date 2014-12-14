@@ -2,9 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
 GET     /                           @controllers.ShortenerController.index
 
-GET     /                           @controllers.ShortenerController.redirect(key:String)
+GET     /shorten/:url               @controllers.ShortenerController.shorten(url:String)
 
-GET     /shorten                    @controllers.ShortenerController.shorten(url:String)
+GET     /:key                       @controllers.ShortenerController.redirect(key:String)
+

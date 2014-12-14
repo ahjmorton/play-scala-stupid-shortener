@@ -19,7 +19,7 @@ class MapShortenerService(implicit inj:Injector) extends ShortenerService with I
      
    def shorten(url:String):String = {
      val key = keyGenerator(url)
-     map(key) += url
+     map += (key -> url)
      key
    }
 }

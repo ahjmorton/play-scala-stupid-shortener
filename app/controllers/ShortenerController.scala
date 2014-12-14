@@ -20,5 +20,11 @@ class ShortenerController(implicit inj: Injector) extends Controller with Inject
      Ok(html.shorten(url)(shortened))
    }
    
-   def redirect(key:String) = TODO
+   def redirect(key:String) = Action {
+     shortener.retrieve(key) match {
+       case Some(url) => Redirect(url)
+       case _ => NotFound
+     }
+     
+   }
 }

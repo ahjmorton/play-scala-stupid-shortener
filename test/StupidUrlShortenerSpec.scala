@@ -47,13 +47,35 @@ class ShortenerSpec extends Specification with Mockito {
     "getting a shortened url" in {
       running(fakeApp) {
           val fakeShort = "test"
-          val url = "http://test.com"
+          val url = "test.com"
           shortener.shorten(url) returns fakeShort
-          val result = route(FakeRequest(GET, "/shorten?url=" + url)).get
+          val result = route(FakeRequest(GET, "/shorten/" + url)).get
         
           status(result) must equalTo(OK)
           contentType(result) must beSome.which(_ == "text/html")
           contentAsString(result) must be containing fakeShort
+      }
+    }
+    
+    "retrieving a shortened url" in {
+      running(fakeApp) {
+          val fakeShort = "test"
+          val url = "test.com"
+          shortener.retrieve(fakeShort) returns Some(url)
+          val result = route(FakeRequest(GET, "/" + fakeShort)).get
+        
+          status(result) must equalTo(SEE_OTHER)
+          redirectLocation(result) must beSome(url)
+      }
+    }
+    
+    "retrieving a missing shortened url" in {
+      running(fakeApp) {
+          val fakeShort = "test"
+          shortener.retrieve(fakeShort) returns None
+          val result = route(FakeRequest(GET, "/" + fakeShort)).get
+        
+          status(result) must equalTo(NOT_FOUND)
       }
     }
   }
