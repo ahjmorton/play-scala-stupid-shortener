@@ -3,4 +3,4 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.StupidUrlShortener.index
+GET     /                           @controllers.ShortenerController.index
