@@ -13,7 +13,7 @@ import play.api.GlobalSettings
 import modules.WebModule
 
 @RunWith(classOf[JUnitRunner])
-class ShortenerSpec extends Specification with Mockito {
+class ShortenerControllerSpec extends Specification with Mockito {
   
   val shortener = mock[ShortenerService]
   
