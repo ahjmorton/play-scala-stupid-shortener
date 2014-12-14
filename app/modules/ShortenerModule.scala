@@ -1,8 +1,7 @@
 package modules
 
 import scaldi.Module
-import com.stupid.shortener.ShortenerService
-import com.stupid.shortener.MapShortenerService
+import services._
 
 class ShortenerModule extends Module{
   

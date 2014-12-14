@@ -6,7 +6,7 @@ import play.api.test.Helpers._
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
 import scaldi.Module
-import com.stupid.shortener.ShortenerService
+import services.ShortenerService
 
 @RunWith(classOf[JUnitRunner])
 class IntegrationSpec extends Specification {

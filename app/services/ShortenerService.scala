@@ -1,4 +1,4 @@
-package com.stupid.shortener
+package services
 
 import scaldi.Injector
 import scaldi.Injectable
