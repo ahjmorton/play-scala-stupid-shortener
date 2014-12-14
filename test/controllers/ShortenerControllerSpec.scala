@@ -1,16 +1,16 @@
-package test
+package controllers
 
 import org.specs2.mutable._
 import play.api.test._
 import play.api.test.Helpers._
 import org.junit.runner.RunWith
-import org.specs2.runner.JUnitRunner
 import scaldi.Module
 import services.ShortenerService
 import org.specs2.mock.Mockito
 import scaldi.play.ScaldiSupport
 import play.api.GlobalSettings
 import modules.WebModule
+import org.specs2.runner.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class ShortenerControllerSpec extends Specification with Mockito {
