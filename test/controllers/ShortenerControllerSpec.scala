@@ -44,7 +44,7 @@ class ShortenerControllerSpec extends Specification with Mockito {
       }
     }
     
-    "getting a shortened url" in {
+    "be able to return a shortened url" in {
       running(fakeApp) {
           val fakeShort = "test"
           val url = "test.com"
@@ -58,7 +58,7 @@ class ShortenerControllerSpec extends Specification with Mockito {
       }
     }
     
-    "retrieving a shortened url" in {
+    "redirect a valid shortened url" in {
       running(fakeApp) {
           val fakeShort = "test"
           val url = "test.com"
@@ -72,7 +72,7 @@ class ShortenerControllerSpec extends Specification with Mockito {
       }
     }
     
-    "retrieving a missing shortened url" in {
+    "raise an error with an invalid shortened url" in {
       running(fakeApp) {
           val fakeShort = "test"
           shortener.retrieve(fakeShort) returns None

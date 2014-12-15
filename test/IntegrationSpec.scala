@@ -13,7 +13,7 @@ class IntegrationSpec extends Specification {
   
   "Shortener" should {
     
-    "must display the correct home page" in {
+    "display the correct home page" in {
       running(TestServer(3333), HTMLUNIT) { browser =>
         browser.goTo("http://localhost:3333/")
 
