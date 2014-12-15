@@ -11,19 +11,13 @@ import services.ShortenerService
 @RunWith(classOf[JUnitRunner])
 class IntegrationSpec extends Specification {
   
-  class TestModule extends Module {
-    bind [ShortenerService]
-  }
-  
-  "Application" should {
+  "Shortener" should {
     
-    "work from within a browser" in {
+    "must display the correct home page" in {
       running(TestServer(3333), HTMLUNIT) { browser =>
         browser.goTo("http://localhost:3333/")
-        
-        browser.$("h1").first.getText must be containing "Hello world"
-        
-         
+
+        browser.$(".urlInput").isEmpty !== (true)
       }
     }
     

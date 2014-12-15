@@ -1,7 +1,11 @@
-@(message:String)
+@(urlForm: Form[(String)])
+
+@import helper._
 
 @main(title = "Stupid URL shortener") {
 
-    <h1>@message</h1>
-
+    @form(action = controllers.routes.ShortenerController.shorten) {
+        @inputText(field = urlForm("url"), 'class -> "urlInput")
+        <input type="submit" value="Shorten" />
+    }
 }

@@ -49,7 +49,8 @@ class ShortenerControllerSpec extends Specification with Mockito {
           val fakeShort = "test"
           val url = "test.com"
           shortener.shorten(url) returns fakeShort
-          val result = route(FakeRequest(GET, "/shorten/" + url)).get
+          val request = FakeRequest(POST, "/shorten/").withFormUrlEncodedBody("url" -> url)
+          val result = route(request).get
         
           status(result) must equalTo(OK)
           contentType(result) must beSome.which(_ == "text/html")

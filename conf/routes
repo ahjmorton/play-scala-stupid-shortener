@@ -4,7 +4,7 @@
 
 GET     /                           @controllers.ShortenerController.index
 
-GET     /shorten/:url               @controllers.ShortenerController.shorten(url:String)
+POST     /shorten/               @controllers.ShortenerController.shorten()
 
 GET     /:key                       @controllers.ShortenerController.redirect(key:String)
 

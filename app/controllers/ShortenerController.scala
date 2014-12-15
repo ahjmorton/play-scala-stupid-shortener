@@ -1,23 +1,34 @@
-package controllers
+ package controllers
 
-import play.api.mvc.Controller
+import play.api.mvc.{Controller, Action, Request}
+
 import views.html
-import play.api.mvc.Action
 import scaldi.Injectable
 import services.ShortenerService
 import scaldi.Injector
+
+import play.api.data._
+import play.api.data.Forms._
 
 class ShortenerController(implicit inj: Injector) extends Controller with Injectable {
   
    val shortener = inject [ShortenerService] 
   
+   private val urlForm = Form(single("url" -> nonEmptyText))
+   
    def index = Action {
-     Ok(html.index("Hello world"))
+     Ok(html.index(urlForm))
    }
    
-   def shorten(url:String) = Action {
-     val shortened = shortener.shorten(url)
-     Ok(html.shorten(url)(shortened))
+   def shorten() = Action { implicit request => 
+     urlForm.bindFromRequest.fold(
+         formWithErrors => NotFound,
+         url => {
+           val shortened = shortener.shorten(url)
+           Ok(html.shorten(url)(shortened))
+         }
+         
+     )
    }
    
    def redirect(key:String) = Action {
