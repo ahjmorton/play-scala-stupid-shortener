@@ -7,7 +7,7 @@ import scaldi.Injectable
 import services.ShortenerService
 import scaldi.Injector
 
-import play.api.data._
+import play.api.data.Form
 import play.api.data.Forms._
 
 class ShortenerController(implicit inj: Injector) extends Controller with Injectable {
@@ -25,7 +25,7 @@ class ShortenerController(implicit inj: Injector) extends Controller with Inject
          formWithErrors => NotFound,
          url => {
            val shortened = shortener.shorten(url)
-           Ok(html.shorten(url)(shortened))
+           Ok(html.shorten(request.host)(url)(shortened))
          }
          
      )

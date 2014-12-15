@@ -1,7 +1,7 @@
-@(original:String)(short:String)
+@(host:String)(original:String)(short:String)
 
 @main(title = ("Shortened form of " + original)) {
 
-    <h1>@short</h1>
+    <h1>@(host + "/" + short)</h1>
 
 }
