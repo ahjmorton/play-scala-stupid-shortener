@@ -33,7 +33,7 @@ class ShortenerController(implicit inj: Injector) extends Controller with Inject
    
    def redirect(key:String) = Action {
      shortener.retrieve(key) match {
-       case Some(url) => Redirect(url)
+       case Some(url) => MovedPermanently(url)
        case _ => NotFound
      }
      
