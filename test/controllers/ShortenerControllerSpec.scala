@@ -66,7 +66,9 @@ class ShortenerControllerSpec extends Specification with Mockito {
           val result = route(FakeRequest(GET, "/" + fakeShort)).get
         
           status(result) must equalTo(MOVED_PERMANENTLY)
-          redirectLocation(result) must beSome(url)
+          redirectLocation(result).isDefined mustEqual (true)
+          val location = redirectLocation(result).get
+          location must be containing url
       }
     }
     
