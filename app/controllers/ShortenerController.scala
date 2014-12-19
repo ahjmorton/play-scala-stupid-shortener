@@ -14,7 +14,7 @@ class ShortenerController(implicit inj: Injector) extends Controller with Inject
   
    val shortener = inject [ShortenerService] 
   
-   private val urlForm = Form(single("url" -> nonEmptyText))
+   private val urlForm = Form(single("url" -> UrlMapping.url))
    
    def index = Action {
      Ok(html.index(urlForm))
@@ -25,7 +25,8 @@ class ShortenerController(implicit inj: Injector) extends Controller with Inject
          formWithErrors => NotFound,
          url => {
            val shortened = shortener.shorten(url)
-           Ok(html.shorten(request.host)(url)(shortened))
+           val base = (if (request.secure) "https://" else "http://") + request.host
+           Ok(html.shorten(base)(url)(shortened))
          }
          
      )
@@ -33,7 +34,7 @@ class ShortenerController(implicit inj: Injector) extends Controller with Inject
    
    def redirect(key:String) = Action {
      shortener.retrieve(key) match {
-       case Some(url) => MovedPermanently("http://" + url)
+       case Some(url) => MovedPermanently(url)
        case _ => NotFound
      }
      

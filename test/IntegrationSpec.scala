@@ -12,7 +12,7 @@ import services.ShortenerService
 class IntegrationSpec extends Specification {
   
   val ServerPort = 3333
-  val ServerUrl = "http://localhost:" + ServerPort
+  val ServerUrl = "http://localhost:" + ServerPort + "/"
   
   "Shortener" should {
         
@@ -40,8 +40,7 @@ class IntegrationSpec extends Specification {
         browser.$(".shortenResult").size === 1
         
         val shortened = browser.$(".shortenResult").first().getText()
-        println(shortened)
-        browser.goTo(shortened).await()
+        browser.goTo(shortened)
         browser.url() === testUrl
       }
       
