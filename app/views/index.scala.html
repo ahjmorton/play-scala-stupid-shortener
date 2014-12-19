@@ -4,8 +4,8 @@
 
 @main(title = "Stupid URL shortener") {
 
-    @form(action = controllers.routes.ShortenerController.shorten) {
-        @inputText(field = urlForm("url"), 'class -> "urlInput")
+    @form(action = controllers.routes.ShortenerController.shorten, 'class -> "urlInput") {
+        @inputText(field = urlForm("url"))
         <input type="submit" value="Shorten" />
     }
 }
