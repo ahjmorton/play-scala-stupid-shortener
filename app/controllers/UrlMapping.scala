@@ -14,7 +14,7 @@ object UrlMapping {
   implicit val urlFormatter = new Formatter[String] {
     override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = {
       data.get(key).map { value => Right(forceScheme(value)) }
-                   .getOrElse(error(key, "No contact type provided."))
+                   .getOrElse(error(key, "No url provided."))
     }
 
     private def error(key: String, msg: String) = Left(List(new FormError(key, msg)))
