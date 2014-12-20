@@ -7,5 +7,5 @@ class ShortenerModule extends Module{
   
   bind [ShortenerService] to new MapShortenerService
   
-  bind [String => String] identifiedBy 'keyGenerator to ((s:String) => s.hashCode().toString)
+  bind [String => String] identifiedBy 'keyGenerator to (CRC16.apply _)
 }
