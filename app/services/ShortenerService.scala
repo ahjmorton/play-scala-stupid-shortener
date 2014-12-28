@@ -40,8 +40,8 @@ class AnormShortnerService(implicit inj:Injector) extends ShortenerService with 
   def shorten(url:String):String = {
     val key = keyGenerator(url)
     DB.withConnection { implicit c =>
-      SQL("insert into shortened(key, original) values ({key}, {original})")
-        .on("key" -> key, "original" -> url).executeInsert()
+        SQL("merge into shortened(key, original) key (key) values ({key}, {original})")
+          .on("key" -> key, "original" -> url).executeInsert()
     }
     key
   }
