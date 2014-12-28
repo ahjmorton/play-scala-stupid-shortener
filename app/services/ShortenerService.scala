@@ -2,8 +2,6 @@ package services
 
 import scaldi.Injector
 import scaldi.Injectable
-import anorm.SQL 
-import play.api.db.DB
 
 trait ShortenerService {
      def retrieve(key:String):Option[String]
@@ -30,6 +28,8 @@ class AnormShortnerService(implicit inj:Injector) extends ShortenerService with 
   
   val keyGenerator = inject [String => String] (identified by 'keyGenerator)
 
+  import anorm.SQL 
+  import play.api.db.DB
   import play.api.Play.current
   
   def retrieve(key:String):Option[String] = DB.withConnection { implicit c =>
