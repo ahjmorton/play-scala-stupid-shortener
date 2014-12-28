@@ -12,3 +12,4 @@ dist
 .project
 .settings
 bin
+*.db

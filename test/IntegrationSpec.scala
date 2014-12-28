@@ -5,8 +5,6 @@ import play.api.test._
 import play.api.test.Helpers._
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
-import scaldi.Module
-import services.ShortenerService
 
 @RunWith(classOf[JUnitRunner])
 class IntegrationSpec extends Specification {
@@ -14,10 +12,17 @@ class IntegrationSpec extends Specification {
   val ServerPort = 3333
   val ServerUrl = "http://localhost:" + ServerPort + "/"
   
+  def testServer =  
+    TestServer(
+      port=ServerPort, 
+      application=FakeApplication(additionalConfiguration = inMemoryDatabase())
+    )
+  
+  
   "Shortener" should {
         
     "display the correct home page" in {
-      running(TestServer(ServerPort), HTMLUNIT) { browser =>
+      running(testServer, HTMLUNIT) { browser =>
         browser.goTo(ServerUrl)
 
         browser.$(".urlInput").isEmpty !== (true)
@@ -25,7 +30,7 @@ class IntegrationSpec extends Specification {
     }
     
     "generate and use a shortened url" in {
-      running(TestServer(ServerPort), HTMLUNIT) { browser => 
+      running(testServer, HTMLUNIT) { browser => 
         browser.goTo(ServerUrl)
 
         val urlInputs = browser.$(".urlInput")

@@ -25,7 +25,11 @@ class ShortenerControllerSpec extends Specification with Mockito {
     def applicationModule = new TestModule :: new WebModule
   }
   
-  def fakeApp = FakeApplication(withGlobal=Some(TestGlobal))
+  def fakeApp = 
+    FakeApplication(
+      withGlobal=Some(TestGlobal),
+      additionalConfiguration=inMemoryDatabase()
+    )
   
   "ShortenerController" should {
     
