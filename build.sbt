@@ -7,6 +7,7 @@ lazy val root = (project in file("."))
      .settings (
          libraryDependencies += "org.scaldi" %% "scaldi-play" % "0.3.3",
          libraryDependencies += jdbc,
-         libraryDependencies += anorm
+         libraryDependencies += anorm,
+         libraryDependencies += cache
      )
 

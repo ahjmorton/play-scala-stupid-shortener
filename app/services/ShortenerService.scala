@@ -24,6 +24,24 @@ class MapShortenerService(implicit inj:Injector) extends ShortenerService with I
    }
 }
 
+trait Caching extends ShortenerService {
+  
+  import play.api.Play.current
+  import play.api.cache.Cache
+  
+  abstract override def retrieve(key:String):Option[String] = Cache.getOrElse(key) {
+    val result = super.retrieve(key)
+    Cache.set(key, result)
+    result
+  }
+     
+  abstract override def shorten(url:String):String = {
+    val result = super.shorten(url)
+    Cache.set(result, url)
+    result
+  }
+}
+
 class AnormShortnerService(implicit inj:Injector) extends ShortenerService with Injectable {  
   
   val keyGenerator = inject [String => String] (identified by 'keyGenerator)
